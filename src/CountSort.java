@@ -24,10 +24,9 @@ class CountSortSolution {
         for (int i = 0; i < array.length; i++) {
             temp[array[i]]++;
         }
-
+        int i = 0;// if i in the for loop, it will become 0 after every iteration
         //j is the index of temp array
         for (int j = 0; j < temp.length; j++) {
-            int i = 0;
             while (temp[j] != 0) {
                 result[i] = j;
                 i++;
