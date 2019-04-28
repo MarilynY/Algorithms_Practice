@@ -147,7 +147,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556296018401" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556460987791" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RunDashboard">
@@ -162,7 +162,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.TestKeywordStatic">
+  <component name="RunManager" selected="Application.RainbowSort">
     <configuration name="MergeSort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MergeSort" />
       <module name="Algorithms_Practice" />
@@ -172,6 +172,20 @@
     </configuration>
     <configuration name="MergeTwoSortedArray" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MergeTwoSortedArray" />
+      <module name="Algorithms_Practice" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="QuickSort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="QuickSort" />
+      <module name="Algorithms_Practice" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RainbowSort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="RainbowSort" />
       <module name="Algorithms_Practice" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -188,11 +202,15 @@
       <item itemvalue="Application.MergeTwoSortedArray" />
       <item itemvalue="Application.MergeSort" />
       <item itemvalue="Application.TestKeywordStatic" />
+      <item itemvalue="Application.QuickSort" />
+      <item itemvalue="Application.RainbowSort" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TestKeywordStatic" />
+        <item itemvalue="Application.RainbowSort" />
+        <item itemvalue="Application.QuickSort" />
         <item itemvalue="Application.MergeSort" />
+        <item itemvalue="Application.TestKeywordStatic" />
         <item itemvalue="Application.MergeTwoSortedArray" />
       </list>
     </recent_temporary>
