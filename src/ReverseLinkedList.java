@@ -1,6 +1,34 @@
 
-/*
+/* Method 1
+Algorithms: Iteratively
+
+       N1 -> N2 -> N3 -> N4 -> null
+    prev    curr  next
+Time: O(n)
+Space: O(1)
+*/
+class ReverseLinkedListSolution {
+    public ListNode reverseLinkedList(ListNode head) {
+        //corner case: has no elements or one element
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode prev = null;
+
+        while (head != null) {
+            ListNode next = head.next;
+            head.next = prev;
+            prev = head;
+            head = next;
+        }
+        return prev;
+
+    }
+}
+
+/* Method 2
 Algorithms： Recursion
+
 Assume 从N2到N4已经是翻转好的了， 那么把N1连接上就好了
 N1→  | N2 ← N3 ← N4
 head            head1
@@ -10,7 +38,7 @@ head.next = null
 
 Time: O(n)
 Space: O(n) for call stack
-*/
+
 
 
 class ReverseLinkedListSolution {
@@ -30,6 +58,7 @@ class ReverseLinkedListSolution {
         return head1;
     }
 }
+*/
 
 //Test case
 public class ReverseLinkedList {
