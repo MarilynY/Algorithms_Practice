@@ -5,12 +5,12 @@ public class TreeNodeImplementation {
 }
 
 class TreeNode {
-    int value;
-    TreeNode left；
-    TreeNode right；
+    int key;
+    TreeNode left;
+    TreeNode right;
 
     public TreeNode(int v) {
-        value = v;
+        key = v;
     }
 }
 
