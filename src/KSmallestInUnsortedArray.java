@@ -4,7 +4,7 @@ import static java.util.Arrays.copyOfRange;
 //Assumption: k >= 0, array != null, k <= array.length
 public class KSmallestInUnsortedArray {
     public static void main(String[] args) {
-        int[] array = {1};
+        int[] array = {3, 1, 5, 2, 4, 0};
         int k = 1;
         KSmallestInUnsortedArraySolution test = new KSmallestInUnsortedArraySolution();
         int[] res = test.kSmallest(array, k);
@@ -21,14 +21,13 @@ class KSmallestInUnsortedArraySolution {
             return new int[0];
         }
         findKSmallest(array, k, 0, array.length - 1);
-        Arrays.sort(array, 0, k + 1 ); //keep in mind   左闭右开
+        Arrays.sort(array, 0, k); //keep in mind   左闭右开 k+1会导致index out of bound when {1}， 1
         return Arrays.copyOfRange(array,0, k); //not ascending order yet   [0, k)
-
     }
 
     private void findKSmallest(int[] array, int k, int left, int right) {
         //base case
-        //stop searching when no elements or one elements left
+        //stop searching when no elements
         if (left > right) { // left == right 的时候还有一个元素需要看，不能停下来
             return;
         }
