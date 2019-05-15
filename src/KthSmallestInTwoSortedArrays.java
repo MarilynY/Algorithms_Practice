@@ -32,7 +32,7 @@ class KthSmallestInTwoSortedArraysSolution {
         int aval = amid >= a.length ? Integer.MAX_VALUE : a[amid];
         int bval = bmid >= b.length ? Integer.MAX_VALUE : b[bmid];
         if (aval <= bval) {
-            return kth(a, amid + 1, b, bleft, k - k/2);
+            return kth(a, amid + 1, b, bleft, k - k/2);//没有定义有边界，是通过搜索范围减小一半，来限定的
         } else {
             //System.out.println("k:" + k);
             return kth(a, aleft, b, bmid + 1, k - k/2);
@@ -47,4 +47,6 @@ round 3: k = 2, amid = 3, aleft = 3, bleft = 2
 round 4：k = 1, aleft = 4, 出界 -》 base case
 
 在这个工程中，搜索范围k是在不断变化的
+其实很容易可以理解，如果在第一个array的搜索范围不断的向后走的时候，第二个array的搜索范围一定是不断向前走
+因为已经被排除的元素+被搜索的元素 = k 
 */
