@@ -1,7 +1,7 @@
 public class FindSmallestLargetThanTarget {
     public static void main(String[] args) {
-        int[] array = {1, 3, 4, 6, 9};
-        int target = 6;
+        int[] array = {1};
+        int target = 0;
         FindSmallestLargetThanTargetSolution test = new FindSmallestLargetThanTargetSolution();
         int res = test.smallestLarger(array, target);
         System.out.print(res);
@@ -31,7 +31,7 @@ class FindSmallestLargetThanTargetSolution {
         }
         //post process 1 element
         if (array[left] > target) {
-            return left;
+            return array[left];
         }
         return -1;
     }
