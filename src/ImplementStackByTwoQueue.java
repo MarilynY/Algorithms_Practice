@@ -98,11 +98,11 @@ class ImplementStackByTwoQueueSolution {
     }
 
     public Integer size() {
-        return q1.size() + q2.size();
+        return q1.size();
     }
 
     public boolean isEmpty() {
-        return q1.isEmpty() && q2.isEmpty();
+        return q1.isEmpty();
     }
     private void swap () {
         Queue<Integer> tempQ = q1;
