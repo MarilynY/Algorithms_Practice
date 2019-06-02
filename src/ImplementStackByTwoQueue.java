@@ -26,23 +26,31 @@ public class ImplementStackByTwoQueue {
         System.out.println(testQ.pollFirst()); //6 last in == 6 so first out == 6
         System.out.println("q1:" + testQ.q1 + " q2:" + testQ.q2);
 
-        System.out.println("Test pollFirst method:" + testQ.pollFirst()); //5
+        System.out.println(testQ.pollFirst()); //5
+        System.out.println("q1:" + testQ.q1 + " q2:" + testQ.q2);
 
-        System.out.println("Test peekFirst method:" + testQ.peekFirst()); //3
+        System.out.println(testQ.peekFirst()); //4
+        System.out.println("q1:" + testQ.q1 + " q2:" + testQ.q2);
 
         testQ.offerFirst(7);
         testQ.offerFirst(8);
         System.out.println("q1:" + testQ.q1 + " q2:" + testQ.q2);
-        System.out.println(testQ.pollFirst());
-        System.out.println(testQ.peekFirst());
-        System.out.println(testQ.pollFirst());
+        System.out.println(testQ.pollFirst()); //8
+        System.out.println(testQ.peekFirst()); //7
+        System.out.println(testQ.pollFirst()); //7
         System.out.println("q1:" + testQ.q1 + " q2:" + testQ.q2);
-        System.out.println(testQ.pollFirst());
-        System.out.println(testQ.pollFirst());
-        System.out.println(testQ.pollFirst());
-        System.out.println(testQ.size());
-        System.out.println(testQ.isEmpty());
-        System.out.println(testQ.peekFirst());
+        System.out.println(testQ.pollFirst());//4
+        System.out.println(testQ.pollFirst());//3
+        System.out.println(testQ.pollFirst());//2
+        System.out.println(testQ.size());//1
+        System.out.println(testQ.isEmpty());//false
+        System.out.println(testQ.pollFirst());//1
+        System.out.println(testQ.size());//0
+        System.out.println(testQ.isEmpty());//true
+        System.out.println(testQ.pollFirst());//null
+        System.out.println(testQ.peekFirst());//null
+        testQ.offerFirst(1);
+        System.out.println("q1:" + testQ.q1 + " q2:" + testQ.q2);
     }
 }
 
@@ -50,7 +58,7 @@ public class ImplementStackByTwoQueue {
 class ImplementStackByTwoQueueSolution {
     //offer the new elements in to q1
     Queue<Integer> q1;
-    //keep polling from q1 until q1 is empty, return the last element
+    //keep polling from q1 until one element left. Then return that element and swap s1 and s2
     Queue<Integer> q2;
     //constructor
     public ImplementStackByTwoQueueSolution() {
@@ -63,44 +71,30 @@ class ImplementStackByTwoQueueSolution {
     }
 
     public Integer pollFirst() {
-        if (q1.isEmpty() && q2.isEmpty()) {
+        if (q1.isEmpty()) {
             return null;
         }
-        int temp = 0;
-        //一定要先check q1， 因为new elements每次都是放在q1
-        if (!q1.isEmpty()) {
-            while (q1.size() > 1) {
-                temp = q1.poll();
-                q2.offer(temp);
-            }
-            return q1.poll();
-        } else {
-            while (q2.size() > 1) {
-                temp = q2.poll();
-                q1.offer(temp);
-            }
-            return q2.poll();
+        while (q1.size() > 1) {
+            q2.offer(q1.poll());
         }
+        int res = q1.poll();
+        swap();
+        return res;
     }
 
     public Integer peekFirst() {
-        if (q1.isEmpty() && q2.isEmpty()) {
+        if (q1.isEmpty()) {
             return null;
         }
-        int temp = 0;
-        if (!q1.isEmpty()) {
-            while (q1.size() > 1) {
-                temp = q1.poll();
-                q2.offer(temp);
-            }
-            return q1.poll();
-        } else {
-            while (q2.size() > 1) {
-                temp = q2.poll();
-                q1.offer(temp);
-            }
-            return q2.poll();
+        while (q1.size() > 1) {
+            q2.offer(q1.poll());
         }
+        int res = q1.poll();
+        //peekFirst is different than pollFirst
+        //we need to put the last element back to q2 also
+        q2.offer(res);
+        swap();
+        return res;
     }
 
     public Integer size() {
@@ -109,5 +103,10 @@ class ImplementStackByTwoQueueSolution {
 
     public boolean isEmpty() {
         return q1.isEmpty() && q2.isEmpty();
+    }
+    private void swap () {
+        Queue<Integer> tempQ = q1;
+        q1 = q2;
+        q2 = tempQ;
     }
 }
