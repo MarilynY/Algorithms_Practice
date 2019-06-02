@@ -74,27 +74,28 @@ class ImplementStackByTwoQueueSolution {
         if (q1.isEmpty()) {
             return null;
         }
-        while (q1.size() > 1) {
-            q2.offer(q1.poll());
+        int temp = 0;
+        while (!q1.isEmpty()) {
+            temp = q1.poll();
+            if (!q1.isEmpty()) {
+                q2.offer(temp);
+            }
         }
-        int res = q1.poll();
         swap();
-        return res;
+        return temp;
     }
 
     public Integer peekFirst() {
         if (q1.isEmpty()) {
             return null;
         }
-        while (q1.size() > 1) {
-            q2.offer(q1.poll());
+        int temp = 0;
+        while (!q1.isEmpty()) {
+            temp = q1.poll();
+            q2.offer(temp);
         }
-        int res = q1.poll();
-        //peekFirst is different than pollFirst
-        //we need to put the last element back to q2 also
-        q2.offer(res);
         swap();
-        return res;
+        return temp;
     }
 
     public Integer size() {
