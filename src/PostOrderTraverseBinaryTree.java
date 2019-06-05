@@ -2,7 +2,7 @@ import sun.reflect.generics.tree.Tree;
 
 import java.util.*;
 
-public class PostOrderTraverseBInaryTree {
+public class PostOrderTraverseBinaryTree {
     public static void main(String[] args) {
         TreeNode n1 = new TreeNode(10);
         TreeNode n2 = new TreeNode(5);
