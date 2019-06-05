@@ -27,6 +27,7 @@ public class PreoderTraverseBinaryTree {
 
         TraverseIteratively test2 = new TraverseIteratively();
         List<Integer> result2 = test2.preOrderTraverseIteratively(n1);
+        System.out.println();
         for (int x : result2) {
             System.out.print(x + " "); //10 5 2 7 15 12 20
         }
@@ -51,6 +52,7 @@ class TraverseIteratively {
         while (!stack.isEmpty()) {
             //pointer
             TreeNode curr = stack.pollFirst();
+            res.add(curr.key);
             //The left subtree should be traversed before the right subtree
             //since the stack is LIFO, so we should push right into the stack first
             //so for the next step, the top element of stack is the left subtree
@@ -60,7 +62,7 @@ class TraverseIteratively {
             if (curr.left != null) {
                 stack.offerFirst(curr.left);
             }
-            res.add(curr.key);
+
         }
         return res;
     }
