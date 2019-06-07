@@ -23,25 +23,30 @@ class IfCompleteBinaryTreeSolution {
         if (root == null) {
             return true;
         }
-        //Initialize
         Queue<TreeNode> queue = new LinkedList<>();
+        //Once flag is set to true, there should not have child nodes afterwards
         boolean flag = false;
+        //Initialize
         queue.offer(root);
         //termination
         while (!queue.isEmpty()) {
             //Expand
             TreeNode curr = queue.poll();
-
             //Generate
             if (flag == false) {
-                if (curr.left == null || curr.right == null){
+                if (curr.left == null && curr.right != null) {
+                    return false;
+                }
+                if (curr.left != null && curr.right == null) {
+                    queue.offer(curr.left);
                     flag = true;
                 }
-                if (curr.left != null) {
+                if (curr.left != null && curr.right != null) {
                     queue.offer(curr.left);
-                }
-                if (curr.right != null) {
                     queue.offer(curr.right);
+                }
+                if (curr.left == null && curr.right == null) {
+                    flag = true;
                 }
             } else {
                 if (curr.left != null || curr.right != null) {
