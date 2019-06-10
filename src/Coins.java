@@ -41,16 +41,19 @@ class CoinsSolution {
         helper(target, 0, coins, result, sol);
         return result;
     }
-    private void helper(int remain, int index, int[] coins, List<List<Integer>> result, List<Integer> sol) {
+    private void helper(int moneyLeft, int index, int[] coins, List<List<Integer>> result, List<Integer> sol) {
         //base case
         if (index == coins.length - 1) {
-            sol.add(remain);
-            result.add(sol);
+            if (moneyLeft % coins[coins.length - 1] == 0) {
+                sol.add(moneyLeft / coins[coins.length - 1]);
+                result.add(new ArrayList<Integer>(sol));
+                sol.remove(sol.size() - 1);
+            }
             return;
         }
-        for (int i = 0; i <= remain / coins[index]; i++) {
+        for (int i = 0; i <= moneyLeft / coins[index]; i++) {
             sol.add(i);
-            helper(remain - i * coins[index], index + 1, coins, result, sol);
+            helper(moneyLeft - i * coins[index], index + 1, coins, result, sol);
             sol.remove(sol.size() - 1);
         }
     }
