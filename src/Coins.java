@@ -29,9 +29,8 @@ Level 3  5cents
 
 Level 4  1cent
 
-Base case: remain == 0 return
-recursion:
-
+Time: O(target^4)
+Space: O(n)
 */
 class CoinsSolution {
     public List<List<Integer>> combinations(int target, int[] coins) {
@@ -44,14 +43,17 @@ class CoinsSolution {
     private void helper(int moneyLeft, int index, int[] coins, List<List<Integer>> result, List<Integer> sol) {
         //base case
         if (index == coins.length - 1) {
-            if (moneyLeft % coins[coins.length - 1] == 0) {
-                sol.add(moneyLeft / coins[coins.length - 1]);
-                result.add(new ArrayList<Integer>(sol));
-                sol.remove(sol.size() - 1);
-            }
+            //assume the coins[coins.length - 1] == 1
+            //把最后一种币种在base case处理：因为最后剩余的钱必须让最后一个币种补齐，不能再有不选的情况
+            sol.add(moneyLeft);
+            result.add(new ArrayList<Integer>(sol));
+            //回到上一层之前就要clean up
+            sol.remove(sol.size() - 1);
             return;
         }
-        for (int i = 0; i <= moneyLeft / coins[index]; i++) {
+        //for coins[index], we can pick 0, 1, 2...moneyLeft / coins[index] coins
+        int max = moneyLeft / coins[index];
+        for (int i = 0; i <= max; i++) {
             sol.add(i);
             helper(moneyLeft - i * coins[index], index + 1, coins, result, sol);
             sol.remove(sol.size() - 1);
