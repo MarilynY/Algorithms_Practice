@@ -28,20 +28,26 @@ Space: O(N)
 class AllPermutationISol {
     public List<String> permutations(String set) {
         List<String> result = new ArrayList<>();
-        StringBuilder sb = new StringBuilder();
+        //StringBuilder sb = new StringBuilder();
         char[] array = set.toCharArray();
-        helper(array, 0, result, sb);
+        helper(array, 0, result);
         return result;
     }
-    private void helper(char[] array, int index, List<String> result, StringBuilder sb) {
+    private void helper(char[] array, int index, List<String> result) {
         //base case
         if (index == array.length) {
-            result.add(sb.toString());
+            result.add(new String(array));
         }
+        //index 相当于一个挡板，是一个位置，我把这个挡板后面的所有数都放到挡板的位置来看看一看
         for (int i = index; i < array.length; i++) {
-            sb.append(array[i]);
-            helper(array, index + 1, result, sb);
-            sb.deleteCharAt(sb.length() - 1);
+            swap(array, index, i);
+            helper(array, index + 1, result);
+            swap(array, index, i);
         }
+    }
+    private void swap(char[] array, int i, int j) {
+        char temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
     }
 }
