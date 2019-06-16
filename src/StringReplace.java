@@ -1,9 +1,9 @@
 public class StringReplace {
     public static void main(String[] args) {
-        String input = "abcde";
-        String source = "cd";
+        String input = "studentdent";
+        String source = "den";
         String target1 = "X";
-        String target2 = "XXX";
+        String target2 = "XXXX";
         StringReplaceSol test = new StringReplaceSol();
         String res1 = test.replace(input, source, target1);
         String res2 = test.replace(input, source, target2);
@@ -56,19 +56,96 @@ class StringReplaceSol {
         if (input == null || input.length() == 0 || target.length() == 0) {
             return input;
         }
+        if (target.length() <= source.length()) {
+            return replaceShorter(input, source, target);
+        } else {
+            return replaceLonger(input, source, target);
+        }
+
+    }
+    private String replaceShorter(String input, String source, String target) {
         char[] array = input.toCharArray();
         char[] sourceArray = source.toCharArray();
         char[] targetArray = target.toCharArray();
-        //case 1: len(target) <= len(source)
-        replaceShorter(array, sourceArray, targetArray);
-        //case 2: len(target) > len(source)
-        replaceLonger(array, sourceArray, targetArray);
-        return new String(array);
+        int i = 0;
+        int j = 0;
+        while (j < array.length) {
+            int temp = j;
+            if (array[j] != sourceArray[0]) {
+                 array[i++] = array[j++];
+            } else {
+                //check if whole pattern match
+                for (int k = 0; k < sourceArray.length; k++) {
+                    if (array[temp] != sourceArray[k]) {
+                        break;
+                    }
+                    temp++;
+                }
+                //replace if the whole pattern match
+                if (temp - j == sourceArray.length) {
+                    //source found, start to replace
+                    for (int k = 0; k < targetArray.length; k++) {
+                        array[i] = targetArray[k];
+                        i++;
+                    }
+                    j += sourceArray.length;
+                }
+            }
+        }
+        return new String(array, 0, i);
     }
-    private void replaceShorter(char[] array, char[] sourceArray, char[] targetArray) {
+    private String replaceLonger(String input, String source, String target) {
+        char[] array = input.toCharArray();
+        char[] sourceArray = source.toCharArray();
+        char[] targetArray = target.toCharArray();
+        //calculate how many source patterns in the array
+        int counter = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == sourceArray[0]) {
+                int temp = i;
+                for (int j = 0; j < sourceArray.length; j++) {
+                    if (array[temp] == array[j]) {
+                        temp++;
+                    } else {
+                        break;
+                    }
+                }
 
-    }
-    private void replaceLonger(char[] array, char[] sourceArray, char[] targetArray) {
+                if (temp - i == sourceArray.length) {
+                    counter++;
+                }
+            }
+        }
 
+        //enlarge array
+        char[] newArray = new char[array.length + counter];
+        //iterate new array from right to left
+        /*
+        * studentden _ _     source = den   target = XXXX
+        *              i
+        *          j
+        * */
+        int i = newArray.length - 1;
+        for (int j = array.length - 1; j > 0; j--) {
+            if (newArray[j] != sourceArray[sourceArray.length - 1]) {
+                newArray[i--] = newArray[j--];
+            } else {
+                int temp = j;
+                for (int k = sourceArray.length - 1; k > 0; k--) {
+                    if (newArray[temp] == sourceArray[k]) {
+                        temp--;
+                    } else {
+                        break;
+                    }
+                }
+                if (j - temp == sourceArray.length) {
+                    for (int t = targetArray.length - 1; t > 0; t--) {
+                        newArray[i--] = targetArray[t];
+                    }
+                    j = j - sourceArray.length;
+                }
+            }
+        }
+        return new String(newArray);
     }
 }
