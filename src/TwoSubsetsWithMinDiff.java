@@ -18,7 +18,7 @@ class TwoSubsetsWithMinDiffSolution {
             sum += i;
         }
         List<Integer> currRes = new ArrayList<>();
-        int[] globalMinDiff = new int[1];
+        int[] globalMinDiff = new int[]{Integer.MAX_VALUE};
         helper(array, globalMinDiff, currRes, 0, sum);
         return globalMinDiff[0];
     }
@@ -31,8 +31,9 @@ class TwoSubsetsWithMinDiffSolution {
                     currSum += i;
                 }
                 //diff = restSum - currSum = sum - currSum - currSum = sum - 2*currSum
-                globalMinDiff[0] = Math.min(globalMinDiff[0], (sum - 2 * currSum));
+                globalMinDiff[0] = Math.min(globalMinDiff[0], Math.abs(sum - 2 * currSum));
             }
+            return;
         }
         //case 1: add letter in current layer
         currRes.add(array[level]);
